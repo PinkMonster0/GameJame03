@@ -17,11 +17,11 @@ public class InputManager : MonoBehaviour
         {
             GameManager.Instance.onPausePressed();
         }
-        if(Input.GetKeyUp(KeyCode.A))
+        if(Input.GetKeyUp(KeyCode.W))
         {
             GameManager.Instance.onLeftPressed();
         }
-        if(Input.GetKeyUp(KeyCode.L))
+        if(Input.GetKeyUp(KeyCode.UpArrow))
         {
             GameManager.Instance.onRightPressed();
         }
