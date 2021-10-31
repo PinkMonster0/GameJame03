@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool currentMoveLeft;
 
     public float moveSpeed;
-    public float jumpForce;
+    public float maxJumpForce;
     public float gravity;
     public PlayerStat ps;
     
@@ -26,14 +26,21 @@ public class PlayerController : MonoBehaviour
     private Transform groundCheck;
     private Animator anim;
     private static readonly int Jump1 = Animator.StringToHash("Jump");
-    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int Landing = Animator.StringToHash("Landing");
+    private static readonly int GetHit = Animator.StringToHash("GetHit");
+
 
     private Vector3 prevPos;
     private bool grounded;
     private float ySpeed;
+    [SerializeField] private float initialPhase;
+    private float currentPhase;
+    private float jumpForce;
+    private float startJumpForce;
 
     public void Jump(float force)
     {
+        Debug.Log(grounded + "jump" + ps + " f: " + force);
         if (!grounded || ps != PlayerStat.WALKING)
         {
             return;
@@ -41,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         ps = PlayerStat.JUMPINGUP;
         ySpeed = force;
+        startJumpForce = force;
         anim.SetTrigger(Jump1);
 
         // int i = Random.Range(0, jumpClips.Length);
@@ -64,7 +72,7 @@ public class PlayerController : MonoBehaviour
         // transform.Find("FootCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
         transform.Find("headFootCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
 
-        anim = GetComponent<Animator>();
+        anim = transform.Find("JumpingStudent").GetComponent<Animator>();
         ps = PlayerStat.WALKING;
 
     }
@@ -81,14 +89,15 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.onRightPressed += OnJump;
         }
 
-        StartMove();
+        currentPhase = initialPhase;
+        // StartMove();
         InvokeRepeating(nameof(CheckMovement), 1.0f, 0.3f);
     }
 
-    void StartMove()
-    {
-        anim.SetFloat(Speed, moveSpeed);
-    }
+    // void StartMove()
+    // {
+    //     anim.SetFloat(Speed, moveSpeed);
+    // }
 
     void Move()
     {
@@ -98,9 +107,9 @@ public class PlayerController : MonoBehaviour
         if (!grounded)
         {
             ySpeed -= gravity * Time.deltaTime;
-            if (ySpeed < -jumpForce * 0.4)
+            if (ySpeed < -maxJumpForce * 0.4)
             {
-                ySpeed = -jumpForce;
+                ySpeed = -maxJumpForce;
             }
         }
         switch (ps)
@@ -119,6 +128,8 @@ public class PlayerController : MonoBehaviour
                 if (grounded)
                 {
                     ySpeed = 0.0f;
+                    currentPhase = initialPhase;
+                    anim.SetTrigger(Landing);
                     ps = PlayerStat.WALKING;
                 }
                 else
@@ -185,7 +196,26 @@ public class PlayerController : MonoBehaviour
         prevPos = currPos;
 
     }
-    
+
+    private void Update()
+    {
+        // if (ps == PlayerStat.WALKING)
+        // {
+        //     currentPhase += Time.time * 2;
+        // }
+        // float t = Mathf.Sin(currentPhase);
+        // if (t >= 0)
+        // {
+        //     jumpForce = t * maxJumpForce + 5;
+        // }
+        // else
+        // {
+        //     jumpForce = 0;
+        // }
+
+        jumpForce = maxJumpForce;
+    }
+
     private void FixedUpdate()
     {
         CheckGround();
