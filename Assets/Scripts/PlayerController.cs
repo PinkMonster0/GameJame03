@@ -14,10 +14,10 @@ public enum PlayerStat
 public class PlayerController : MonoBehaviour
 {
     public bool isLeftPlayer;
-    
+    public bool currentMoveLeft;
+
     public float moveSpeed;
     public float jumpForce;
-    public float jumpDamp;
     public float gravity;
     public PlayerStat ps;
     
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int Jump1 = Animator.StringToHash("Jump");
     private static readonly int Speed = Animator.StringToHash("Speed");
 
-    private bool currentMoveLeft;
+    private Vector3 prevPos;
     private bool grounded;
     private float ySpeed;
 
@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
     {
         groundCheck = transform.Find("groundCheck");
         transform.Find("hitCheck").GetComponent<CollisionHandler>().collideDelegate += OnBodyHit;
-        transform.Find("headCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
-        transform.Find("FootCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
+        // transform.Find("headCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
+        // transform.Find("FootCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
         transform.Find("headFootCheck").GetComponent<CollisionHandler>().collideDelegate += OnHeadFootHit;
 
         anim = GetComponent<Animator>();
@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         }
 
         StartMove();
+        InvokeRepeating(nameof(CheckMovement), 1.0f, 0.3f);
     }
 
     void StartMove()
@@ -140,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
     public void Flip()
     {
-        Debug.Log("Flip!");
+        // Debug.Log("Flip!");
         currentMoveLeft ^= true;
         var transform1 = transform;
         Vector3 theScale = transform1.localScale;
@@ -154,7 +155,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Debug.Log("hit body + " + other.name);
+        // Debug.Log("hit body + " + other.name);
         Flip();
     }
 
@@ -173,6 +174,18 @@ public class PlayerController : MonoBehaviour
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, Int32.MaxValue - LayerMask.GetMask($"Player"));
     }
 
+    void CheckMovement()
+    {
+        Vector3 currPos = transform.position;
+        if (prevPos == currPos)
+        {
+            Flip();
+        }
+
+        prevPos = currPos;
+
+    }
+    
     private void FixedUpdate()
     {
         CheckGround();
