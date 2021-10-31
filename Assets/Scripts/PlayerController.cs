@@ -23,7 +23,9 @@ public class PlayerController : MonoBehaviour
     public int health;
     
     public AudioClip[] jumpClips;
-
+    public GameObject jumpEffect;
+    public GameObject hitEffect;
+    
     private Transform groundCheck;
     private Animator anim;
     private static readonly int Jump1 = Animator.StringToHash("Jump");
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         ySpeed = force;
         startJumpForce = force;
         anim.SetTrigger(Jump1);
+        Instantiate(jumpEffect, groundCheck.position + Vector3.up, groundCheck.rotation);
 
         // int i = Random.Range(0, jumpClips.Length);
         // AudioSource.PlayClipAtPoint(jumpClips[i], position);
@@ -154,6 +157,7 @@ public class PlayerController : MonoBehaviour
     public void Hit()
     {
         anim.SetTrigger(GetHit);
+        Instantiate(hitEffect, transform, true);
     }
     
     public void Flip()
@@ -181,6 +185,9 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.PlayerHit();
+            // Collider2D[] contacts = new Collider2D[100];
+            // other.GetContacts(contacts);
+            // Instantiate(hitEffect, contacts[0].transform.position, contacts[0].transform.rotation);
             // Flip();
             // Jump(10);
         }

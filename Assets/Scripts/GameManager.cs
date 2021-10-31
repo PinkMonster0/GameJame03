@@ -67,11 +67,11 @@ public class GameManager : MonoBehaviour
         var position2 = Player2.transform.position;
         bool isPlayer1AtLeft = position1.x < position2.x;
         int isPlayer1Higher = 0;
-        if (position1.y - position2.y >= 0.2f)
+        if (position1.y - position2.y >= 0.3f)
         {
             isPlayer1Higher = 1;
         }
-        else if (position2.y - position1.y >= 0.2f)
+        else if (position2.y - position1.y >= 0.3f)
         {
             isPlayer1Higher = -1;
         }
