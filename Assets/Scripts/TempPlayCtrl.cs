@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TempPlayCtrl : MonoBehaviour
 {
+    [SerializeField]
     private Animator m_amimator;
-    private Animator m_fxAnimator;
+    [SerializeField]
+    private GameObject m_fxPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,10 @@ public class TempPlayCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_amimator.SetTrigger("Jump");
+            Instantiate(m_fxPrefab, transform);
+        }
     }
 }
