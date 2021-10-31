@@ -40,5 +40,9 @@ public class AnimationController : MonoBehaviour
     {
         iswin = true;
     }
-
+    public void playagian()
+    {
+        //print(1);
+        isplay = true;
+    }
 }
