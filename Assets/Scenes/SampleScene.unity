@@ -3323,13 +3323,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2031445822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 702f30ec4ecff68419bc9a5617c0581a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7596c28aa2ad8e140a83a37f86bd312c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPanel_P1: {fileID: 0}
-  HealthPanel_P2: {fileID: 0}
-  Power_P1: {fileID: 0}
-  Power_P2: {fileID: 0}
+  Camera_animator: {fileID: 0}
+  UI_animator: {fileID: 0}
 --- !u!1 &2067548573
 GameObject:
   m_ObjectHideFlags: 0
