@@ -45,13 +45,4 @@ public class AnimationController : MonoBehaviour
         //print(1);
         isplay = true;
     }
-
-    public void SetAnimatorDefualt()
-    {
-        Camera_animator.SetBool("IsPlay", false);
-        UI_animator.SetBool("IsPlay", false);
-        Camera_animator.SetBool("IsWin", false);
-        UI_animator.SetBool("IsWin", false);
-    }
-
 }
