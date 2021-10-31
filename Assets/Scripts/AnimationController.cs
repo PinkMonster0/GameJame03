@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AnimationController : MonoBehaviour
 {
+    
 
     public Animator Camera_animator;
     public Animator UI_animator;
@@ -44,6 +46,8 @@ public class AnimationController : MonoBehaviour
     {
         //print(1);
         isplay = true;
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     public void SetAnimatorDefualt()
@@ -53,6 +57,7 @@ public class AnimationController : MonoBehaviour
         Camera_animator.SetBool("IsWin", false);
         UI_animator.SetBool("IsWin", false);
         Camera_animator.enabled = false;
+        GameManager.Instance.paused = false;
     }
     
 }

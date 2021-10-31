@@ -14,10 +14,10 @@ public class PlayerUIController : MonoBehaviour
     public Transform Power_P2;
     private Transform[] Health_P1_Image=new Transform[5];
     private Transform[] Health_P2_Image = new Transform[5];
-    private float P1_Health=100;
-    private float P2_Health=100;
-    private float P1_Power=0;
-    private float P2_Power=0;
+    public float P1_Health=100;
+    public float P2_Health=100;
+    public float P1_Power=0;
+    public float P2_Power=0;
     void Start()
     {
         init();
@@ -46,7 +46,7 @@ public class PlayerUIController : MonoBehaviour
     }
     void checkhealth(float health, Transform[] HealthPanel)
     {
-        if (health < 80)
+        if (health <= 80)
         {
             HealthPanel[4].gameObject.SetActive(false);
             HealthPanel[3].gameObject.SetActive(true);
@@ -54,7 +54,7 @@ public class PlayerUIController : MonoBehaviour
             HealthPanel[1].gameObject.SetActive(true);
             HealthPanel[0].gameObject.SetActive(true);
         }
-        if (health < 60)
+        if (health <= 60)
         {
             HealthPanel[4].gameObject.SetActive(false);
             HealthPanel[3].gameObject.SetActive(false);
@@ -63,7 +63,7 @@ public class PlayerUIController : MonoBehaviour
             HealthPanel[0].gameObject.SetActive(true);
 
         }
-        if (health < 40)
+        if (health <= 40)
         {
             HealthPanel[4].gameObject.SetActive(false);
             HealthPanel[3].gameObject.SetActive(false);
@@ -71,7 +71,7 @@ public class PlayerUIController : MonoBehaviour
             HealthPanel[1].gameObject.SetActive(true);
             HealthPanel[0].gameObject.SetActive(true);
         }
-        if (health < 20)
+        if (health <= 20)
         {
             HealthPanel[4].gameObject.SetActive(false);
             HealthPanel[3].gameObject.SetActive(false);

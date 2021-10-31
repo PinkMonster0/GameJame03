@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController Player1;
     public PlayerController Player2;
+    public PlayerUIController uIController;
+    public AnimationController animController;
 
     public bool paused = false;
     
@@ -132,6 +134,23 @@ public class GameManager : MonoBehaviour
     {
         PlayerController otherP = GetOtherPlayer(p);
         otherP.Hit();
+        if (otherP == Player1)
+        {
+            uIController.P1_Health -= 20;
+            if (uIController.P1_Health <= 0)
+            {
+                animController.win();
+            }
+        }
+        else if (otherP == Player2)
+        {
+            uIController.P2_Health -= 20;
+            if (uIController.P2_Health <= 0)
+            {
+                animController.win();
+            }
+        }
+
         SlowTime();
         Invoke(nameof(ResumeTime), 0.5f);
         Debug.Log(p.name);
@@ -182,6 +201,8 @@ public class GameManager : MonoBehaviour
         onLeftPressed += LeftPresed;
         onRightPressed += RightPressed;
         onPausePressed += PausePressed;
+
+        paused = true;
     }
 
     void Update()

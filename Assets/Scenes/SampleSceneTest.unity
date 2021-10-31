@@ -386,6 +386,16 @@ PrefabInstance:
       propertyPath: Player2
       value: 
       objectReference: {fileID: 1150275407}
+    - target: {fileID: 4984508134746466300, guid: c874ccd5ca445a742b60178e3262e3d2,
+        type: 3}
+      propertyPath: uIController
+      value: 
+      objectReference: {fileID: 1459166399}
+    - target: {fileID: 4984508134746466300, guid: c874ccd5ca445a742b60178e3262e3d2,
+        type: 3}
+      propertyPath: animController
+      value: 
+      objectReference: {fileID: 1459166400}
     - target: {fileID: 5343031849009129743, guid: c874ccd5ca445a742b60178e3262e3d2,
         type: 3}
       propertyPath: m_RootOrder
@@ -4894,6 +4904,10 @@ MonoBehaviour:
   HealthPanel_P2: {fileID: 130085479}
   Power_P1: {fileID: 347341873}
   Power_P2: {fileID: 1182620072}
+  P1_Health: 100
+  P2_Health: 100
+  P1_Power: 0
+  P2_Power: 0
 --- !u!114 &1459166400
 MonoBehaviour:
   m_ObjectHideFlags: 0
