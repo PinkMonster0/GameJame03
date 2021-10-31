@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public PlayerController Player1;
     public PlayerController Player2;
 
+    public bool paused = false;
+    
     private bool isPaused;
     private float prevTimeScale;
     
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
 
         if (isPlayer1Higher == 0 || (Player1.ps == PlayerStat.WALKING && Player2.ps == PlayerStat.WALKING))
         {
+
             return;
         }
         else
@@ -127,8 +130,10 @@ public class GameManager : MonoBehaviour
     
     void PlayerWin(PlayerController p)
     {
+        PlayerController otherP = GetOtherPlayer(p);
+        otherP.Hit();
         SlowTime();
-        Invoke(nameof(ResumeTime), 0.05f);
+        Invoke(nameof(ResumeTime), 0.5f);
         Debug.Log(p.name);
     }
     
@@ -150,12 +155,26 @@ public class GameManager : MonoBehaviour
 
     void SlowTime()
     {
-        Time.timeScale = 0.1f;
+        // Time.timeScale = 0.1f;
+        paused = true;
     }
     
     void ResumeTime()
     {
-        Time.timeScale = 1.0f;
+        // Time.timeScale = 1.0f;
+        paused = false;
+        var position1 = Player1.transform.position;
+        var position2 = Player2.transform.position;
+        bool isPlayer1AtLeft = position1.x < position2.x;
+        if (!(isPlayer1AtLeft ^ Player1.currentMoveLeft))
+        {
+            Player1.Flip();
+        }
+
+        if (!(!isPlayer1AtLeft ^ Player2.currentMoveLeft))
+        {
+            Player2.Flip();
+        }
     }
     
     void Start()

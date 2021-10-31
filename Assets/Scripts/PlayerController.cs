@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float maxJumpForce;
     public float gravity;
     public PlayerStat ps;
+    public int health;
     
     public AudioClip[] jumpClips;
 
@@ -28,7 +29,6 @@ public class PlayerController : MonoBehaviour
     private static readonly int Jump1 = Animator.StringToHash("Jump");
     private static readonly int Landing = Animator.StringToHash("Landing");
     private static readonly int GetHit = Animator.StringToHash("GetHit");
-
 
     private Vector3 prevPos;
     private bool grounded;
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentPhase = initialPhase;
+        health = 5;
         // StartMove();
         InvokeRepeating(nameof(CheckMovement), 1.0f, 0.3f);
     }
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    currentSpeed.x -= ySpeed * moveDir * 0.5f;
+                    currentSpeed.x -= ySpeed * moveDir * 0.3f;
                 }
                 break;
             case PlayerStat.WALKING:
@@ -150,6 +151,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(currentSpeed * Time.deltaTime);
     }
 
+    public void Hit()
+    {
+        anim.SetTrigger(GetHit);
+    }
+    
     public void Flip()
     {
         // Debug.Log("Flip!");
@@ -189,7 +195,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 currPos = transform.position;
         if (prevPos == currPos)
-        {
+        {   
             Flip();
         }
 
@@ -213,11 +219,15 @@ public class PlayerController : MonoBehaviour
         //     jumpForce = 0;
         // }
 
-        jumpForce = maxJumpForce;
+        jumpForce = maxJumpForce + 5;
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
         CheckGround();
         Move();
     }
