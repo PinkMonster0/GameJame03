@@ -35,6 +35,7 @@ public class AnimationController : MonoBehaviour
     {
         //print(1);
         isplay = true;
+        AudioController.PlayClick();
     }
     public void win()
     {
@@ -44,6 +45,7 @@ public class AnimationController : MonoBehaviour
     {
         //print(1);
         isplay = true;
+        AudioController.PlayClick();
     }
 
     public void SetAnimatorDefualt()
