@@ -12,7 +12,7 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Camera_animator.enabled = true;
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class AnimationController : MonoBehaviour
         UI_animator.SetBool("IsPlay", false);
         Camera_animator.SetBool("IsWin", false);
         UI_animator.SetBool("IsWin", false);
+        Camera_animator.enabled = false;
     }
-
+    
 }
