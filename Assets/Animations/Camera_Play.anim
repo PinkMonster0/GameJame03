@@ -167,11 +167,10 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.75
-    functionName: SetGameStart
+  - time: 0.8333333
+    functionName: SetAnimatorDefualt
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 1bea63e8920f2b1468139ed789d99b16,
-      type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
