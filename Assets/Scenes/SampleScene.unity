@@ -1472,12 +1472,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1448053516329205588, guid: d893602b4f655504b8e6c0d839256708,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448053516329205588, guid: d893602b4f655504b8e6c0d839256708,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1459166399}
     - target: {fileID: 1448053516329205588, guid: d893602b4f655504b8e6c0d839256708,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: playagian
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448053516329205589, guid: d893602b4f655504b8e6c0d839256708,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1459166399}
+    - target: {fileID: 1448053516329205589, guid: d893602b4f655504b8e6c0d839256708,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: playagian
       objectReference: {fileID: 0}
     - target: {fileID: 1448053516629437976, guid: d893602b4f655504b8e6c0d839256708,
@@ -3287,12 +3302,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2031445822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1448053516740510591, guid: d893602b4f655504b8e6c0d839256708,
+    type: 3}
+  m_PrefabInstance: {fileID: 577878503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2031445823 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1448053516740510562, guid: d893602b4f655504b8e6c0d839256708,
     type: 3}
   m_PrefabInstance: {fileID: 577878503}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2031445828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031445822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702f30ec4ecff68419bc9a5617c0581a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthPanel_P1: {fileID: 0}
+  HealthPanel_P2: {fileID: 0}
+  Power_P1: {fileID: 0}
+  Power_P2: {fileID: 0}
 --- !u!1 &2067548573
 GameObject:
   m_ObjectHideFlags: 0
