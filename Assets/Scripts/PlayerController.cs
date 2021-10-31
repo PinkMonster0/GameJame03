@@ -20,15 +20,17 @@ public class PlayerController : MonoBehaviour
     public float maxJumpForce;
     public float gravity;
     public PlayerStat ps;
+    public int health;
     
     public AudioClip[] jumpClips;
-
+    public GameObject jumpEffect;
+    public GameObject hitEffect;
+    
     private Transform groundCheck;
     private Animator anim;
     private static readonly int Jump1 = Animator.StringToHash("Jump");
     private static readonly int Landing = Animator.StringToHash("Landing");
     private static readonly int GetHit = Animator.StringToHash("GetHit");
-
 
     private Vector3 prevPos;
     private bool grounded;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         ySpeed = force;
         startJumpForce = force;
         anim.SetTrigger(Jump1);
+        Instantiate(jumpEffect, groundCheck.position + Vector3.up, groundCheck.rotation);
 
         // int i = Random.Range(0, jumpClips.Length);
         // AudioSource.PlayClipAtPoint(jumpClips[i], position);
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentPhase = initialPhase;
+        health = 5;
         // StartMove();
         InvokeRepeating(nameof(CheckMovement), 1.0f, 0.3f);
     }
@@ -134,7 +138,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    currentSpeed.x -= ySpeed * moveDir * 0.5f;
+                    currentSpeed.x -= ySpeed * moveDir * 0.3f;
                 }
                 break;
             case PlayerStat.WALKING:
@@ -150,6 +154,12 @@ public class PlayerController : MonoBehaviour
         transform.Translate(currentSpeed * Time.deltaTime);
     }
 
+    public void Hit()
+    {
+        anim.SetTrigger(GetHit);
+        Instantiate(hitEffect, transform, true);
+    }
+    
     public void Flip()
     {
         // Debug.Log("Flip!");
@@ -175,6 +185,9 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.PlayerHit();
+            // Collider2D[] contacts = new Collider2D[100];
+            // other.GetContacts(contacts);
+            // Instantiate(hitEffect, contacts[0].transform.position, contacts[0].transform.rotation);
             // Flip();
             // Jump(10);
         }
@@ -189,7 +202,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 currPos = transform.position;
         if (prevPos == currPos)
-        {
+        {   
             Flip();
         }
 
@@ -213,11 +226,15 @@ public class PlayerController : MonoBehaviour
         //     jumpForce = 0;
         // }
 
-        jumpForce = maxJumpForce;
+        jumpForce = maxJumpForce + 5;
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
         CheckGround();
         Move();
     }

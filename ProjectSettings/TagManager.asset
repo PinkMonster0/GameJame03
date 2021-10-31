@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dynamic_UI
+  - ground
+  - Obstacle
+  - ExplosionFX
+  - Bullet
+  - HealthBar
   layers:
   - Default
   - TransparentFX
@@ -12,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - HighGround
   - 
   - 
   - 
